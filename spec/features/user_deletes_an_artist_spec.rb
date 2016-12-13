@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "User deletes an artist" do
   scenario "They delete artist from show page" do
     artist = create(:artist)
-
+    
     visit artist_path(artist)
     click_on "Delete"
 
