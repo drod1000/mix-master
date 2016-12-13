@@ -11,9 +11,11 @@ RSpec.feature "User views all artists" do
 
   end
   scenario "each name links to their page" do
-
+    artist_name       = "Bob Marley"
+    artist_image_path = "http://cps-static.rovicorp.com/3/JPG_400/MI0003/146/MI0003146038.jpg"
+    Artist.create(name: artist_name, image_path: artist_image_path)
     visit artists_path
     click_on "Bob Marley"
-    expect(path).to eq 'artists/1'
+    expect(page).to have_css("img[src=\"#{artist_image_path}\"]")
   end
 end
