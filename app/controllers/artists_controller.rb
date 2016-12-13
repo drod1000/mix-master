@@ -21,6 +21,20 @@ def show
   render :show
 end
 
+def edit
+  @artist = Artist.find(params[:id])
+  render :edit
+end
+
+def update
+  @artist = Artist.find(params[:id])
+  if @artist.update(artist_params)
+    redirect_to artist_path(@artist)
+  else
+    render :edit
+  end
+end
+
 private
 
 def artist_params
