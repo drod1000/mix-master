@@ -23,5 +23,6 @@ RSpec.feature "User creates a playlist" do
     within("li:last") do
       expect(page).to have_link song_three.title, href: song_path(song_three)
     end
+    save_and_open_page
   end
 end

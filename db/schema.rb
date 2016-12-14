@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161214183255) do
+ActiveRecord::Schema.define(version: 20161214191334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,15 @@ ActiveRecord::Schema.define(version: 20161214183255) do
     t.string   "image_path"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "playlist_songs", force: :cascade do |t|
+    t.integer  "song_id"
+    t.integer  "playlist_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["playlist_id"], name: "index_playlist_songs_on_playlist_id", using: :btree
+    t.index ["song_id"], name: "index_playlist_songs_on_song_id", using: :btree
   end
 
   create_table "playlists", force: :cascade do |t|
@@ -36,5 +45,7 @@ ActiveRecord::Schema.define(version: 20161214183255) do
     t.index ["artist_id"], name: "index_songs_on_artist_id", using: :btree
   end
 
+  add_foreign_key "playlist_songs", "playlists"
+  add_foreign_key "playlist_songs", "songs"
   add_foreign_key "songs", "artists"
 end
