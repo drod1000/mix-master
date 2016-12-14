@@ -12,7 +12,7 @@ RSpec.feature "User views all artists" do
     artist = create(:artist)
 
     visit artists_path
-    click_on "Bob Marley"
+    click_on "9 Artist"
     expect(page).to have_css("img[src=\"#{artist.image_path}\"]")
   end
 end
