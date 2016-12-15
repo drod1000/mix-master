@@ -14,10 +14,31 @@ RSpec.feature "User edits a playlist" do
   end
 
   scenario "they select an additional song" do
-    skip
+    playlist = create(:playlist)
+    song_one, song_two = create_list(:song, 2)
+    playlist.songs << song_one
+
+    visit playlist_path(playlist)
+    click_on "Edit"
+
+    check("song-#{song_two.id}")
+    click_on "Update Playlist"
+
+    expect(page).to have_content song_two.title
   end
 
   scenario "they uncheck a song" do
     skip
+    playlist = create(:playlist)
+    song_one, song_two = create_list(:song, 2)
+    playlist.songs << [song_one, song_two]
+
+    visit playlists_path(playlist)
+    click_on "Edit"
+
+    uncheck("song-#{song_one.id}")
+    click_on "Update Playlist"
+
+    expect(page).should_not have_content song_one.title
   end
 end
