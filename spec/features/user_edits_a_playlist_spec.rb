@@ -28,12 +28,11 @@ RSpec.feature "User edits a playlist" do
   end
 
   scenario "they uncheck a song" do
-    skip
     playlist = create(:playlist)
     song_one, song_two = create_list(:song, 2)
     playlist.songs << [song_one, song_two]
 
-    visit playlists_path(playlist)
+    visit playlist_path(playlist)
     click_on "Edit"
 
     uncheck("song-#{song_one.id}")
